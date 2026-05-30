@@ -1,276 +1,408 @@
+
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghost of Networks - BlackHat01</title>
+    <title>Ur_Daemon - Network Disruption System</title>
+    <!-- استدعاء خطوط مرعبة وسيبرانية حادة -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --blood-red: #ff0000;
+            --kali-blue: #0087ff;
+            --dark-void: #020204;
+            --terminal-green: #00ff33;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none;
         }
 
         body {
             min-height: 100vh;
-            font-family: 'Orbitron', 'Courier New', monospace;
-            background: radial-gradient(circle at 20% 50%, #0a0a0a, #000000);
+            font-family: 'Orbitron', 'Cairo', sans-serif;
+            background: radial-gradient(circle at center, #1a0000 0%, var(--dark-void) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* تأثير الضباب */
+        /* تأثير شاشة الرعب (CRT Glitch) */
         body::before {
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(0, 255, 204, 0.02) 0px,
-                rgba(0, 255, 204, 0.02) 2px,
-                transparent 2px,
-                transparent 8px
-            );
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 135, 255, 0.05));
+            background-size: 100% 6px, 6px 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 10;
         }
 
         /* ========== شاشة الترحيب ========== */
         #welcomeScreen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000;
+            inset: 0;
+            background: #000;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+            transition: all 0.8s ease;
         }
 
         .welcome-box {
             text-align: center;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid #00ffcc;
-            border-radius: 25px;
-            box-shadow: 0 0 50px rgba(0, 255, 204, 0.4);
-            animation: fadeInUp 0.8s ease-out;
+            padding: 35px 25px;
+            background: #050505;
+            border: 2px solid var(--blood-red);
+            border-radius: 4px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.4);
             max-width: 450px;
             width: 90%;
+            animation: pulseRed 2s infinite alternate;
+        }
+
+        @keyframes pulseRed {
+            0% { box-shadow: 0 0 30px rgba(255, 0, 0, 0.2); }
+            100% { box-shadow: 0 0 60px rgba(255, 0, 0, 0.6); }
         }
 
         .welcome-box h2 {
-            color: #00ffcc;
-            font-size: 1.8rem;
+            font-family: 'Creepster', cursive;
+            color: var(--blood-red);
+            font-size: 2.5rem;
             margin-bottom: 15px;
             letter-spacing: 2px;
         }
 
         .welcome-box p {
-            color: white;
+            color: #8a8a8a;
             margin-bottom: 20px;
             font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .welcome-box button {
-            padding: 14px 40px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 18px;
-            background: #00ffcc;
-            color: #000000;
             font-weight: bold;
-            transition: all 0.3s ease;
-            margin-top: 10px;
         }
 
-        .welcome-box button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #00ffcc;
+        /* شريط الخيارات الثلاثي */
+        .policy-links-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed rgba(255, 0, 0, 0.15);
+            padding-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .policy-btn {
+            background: transparent;
+            border: none;
+            color: var(--kali-blue);
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: underline;
+        }
+
+        .policy-btn:hover {
+            color: var(--blood-red);
+            text-shadow: 0 0 8px var(--blood-red);
+        }
+
+        .welcome-box button.enter-btn {
+            padding: 12px 50px;
+            border: 2px solid var(--blood-red);
+            background: transparent;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .welcome-box button.enter-btn:hover {
+            background: var(--blood-red);
+            color: #000;
+            box-shadow: 0 0 30px var(--blood-red);
+        }
+
+        .developer-tags {
+            margin-top: 25px;
+            border-top: 1px dashed rgba(255, 0, 0, 0.2);
+            padding-top: 15px;
         }
 
         .developer {
-            margin-top: 20px;
-            color: #00ffcc;
+            color: #555;
             font-size: 11px;
             letter-spacing: 2px;
-            opacity: 0.7;
+            font-family: monospace;
         }
 
-        /* ========== الشعار الجديد (البطريق الشرير) ========== */
-        .logo svg {
-            width: 120px;
-            height: 120px;
-            filter: drop-shadow(0 0 10px #00ffcc) drop-shadow(0 0 20px red);
-            margin-bottom: 10px;
-            transition: filter 0.3s ease;
-        }
-        .logo svg:hover {
-            filter: drop-shadow(0 0 20px #00ffcc) drop-shadow(0 0 35px red);
-        }
-
-        /* ========== البطريق المتحرك الأصلي (في الزاوية) ========== */
-        .penguin {
+        /* ========== نافذة منبثقة للسياسات والشروط ونبذة عني ========== */
+        .modal-overlay {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 100px;
-            height: 100px;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #08080c;
+            border: 1px solid var(--kali-blue);
+            box-shadow: 0 0 40px rgba(0, 135, 255, 0.3);
+            padding: 25px;
+            max-width: 480px;
+            width: 90%;
+            text-align: right;
+            border-radius: 4px;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h3 {
+            color: var(--kali-blue);
+            font-family: 'Cairo', sans-serif;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(0, 135, 255, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .modal-content h3.about-title {
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .modal-content p {
+            color: #a0a0a5;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .close-modal-btn {
+            background: var(--kali-blue);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: bold;
+            font-size: 0.9rem;
             cursor: pointer;
-            z-index: 100;
-            animation: float 3s ease-in-out infinite, wobble 2s ease-in-out infinite;
-            transition: transform 0.2s ease;
-        }
-        .penguin:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        @keyframes wobble {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            75% { transform: rotate(-5deg); }
-        }
-
-        .penguin svg {
             width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.5));
+            transition: background 0.3s;
         }
 
-        /* ========== باقي تصميم الموقع ========== */
+        .close-modal-btn:hover {
+            background: var(--blood-red);
+            color: #fff;
+        }
+
+        /* ========== الحاوية الرئيسية ========== */
         .container {
             position: relative;
-            z-index: 2;
+            z-index: 5;
             text-align: center;
-            padding: 40px;
-            max-width: 700px;
-            width: 90%;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            box-shadow: 0 0 50px rgba(0, 255, 204, 0.1), inset 0 0 20px rgba(0, 255, 204, 0.05);
-            animation: fadeInUp 1s ease-out;
+            padding: 30px 20px;
+            max-width: 650px;
+            width: 92%;
+            background: rgba(5, 5, 8, 0.95);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(255, 0, 0, 0.05);
+            border-radius: 8px;
+            display: block;
+            margin: 20px auto;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* ========== شعار بطريق كالي لينكس ========== */
+        .kali-logo-box {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px auto;
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(0, 135, 255, 0.5));
+            transition: filter 0.3s ease;
+        }
+
+        .kali-logo-box:hover {
+            filter: drop-shadow(0 0 25px var(--blood-red));
+        }
+
+        .brand-header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 25px;
+            display: block;
         }
 
         h1 {
-            font-size: 2.5rem;
-            letter-spacing: 5px;
-            background: linear-gradient(135deg, #00ffcc, #006699);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-            margin-bottom: 10px;
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 3px 3px 0px var(--blood-red);
+            letter-spacing: 2px;
+            text-align: center;
+            margin: 0 auto 8px auto;
+            display: block;
+            width: 100%;
         }
 
         .subtitle {
-            color: #00ffcc;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            opacity: 0.7;
-            border-bottom: 1px solid rgba(0, 255, 204, 0.3);
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 30px;
-        }
-
-        .info-box {
-            background: rgba(0, 0, 0, 0.5);
-            border-left: 3px solid #00ffcc;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: left;
-            font-size: 0.8rem;
-            color: #ccc;
-        }
-
-        esp-web-install-button {
-            margin: 20px auto;
-            display: block;
-            --esp-tools-install-button-bg-color: #00ffcc;
-            --esp-tools-install-button-text-color: #000000;
-            --esp-tools-install-button-font-size: 18px;
-            --esp-tools-install-button-border-radius: 50px;
-            --esp-tools-install-button-padding: 12px 30px;
-            transition: all 0.3s ease;
-        }
-        esp-web-install-button:hover {
-            transform: scale(1.02);
-            filter: drop-shadow(0 0 10px #00ffcc);
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        .stat {
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 1.5rem;
+            color: var(--kali-blue);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
             font-weight: bold;
-            color: #00ffcc;
-            text-shadow: 0 0 5px #00ffcc;
+            text-shadow: 0 0 5px var(--kali-blue);
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            width: 100%;
         }
+
+        .description {
+            color: #b0b0b5;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            text-align: center;
+            display: block;
+            padding: 0 10px;
+        }
+
+        /* ========== زر الرفع والترمينال ========== */
+        esp-web-install-button {
+            margin: 25px auto;
+            display: block;
+            --esp-tools-install-button-bg-color: var(--blood-red);
+            --esp-tools-install-button-text-color: #ffffff;
+            --esp-tools-install-button-font-size: 16px;
+            --esp-tools-install-button-border-radius: 4px;
+            --esp-tools-install-button-padding: 12px 35px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border: 1px solid #000;
+        }
+
+        .terminal-box {
+            background: #000000;
+            border-right: 3px solid var(--blood-red);
+            padding: 15px;
+            margin: 25px auto;
+            border-radius: 2px;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.8;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.1);
+            width: 100%;
+            display: block;
+        }
+
+        .terminal-box span {
+            color: var(--terminal-green);
+            text-shadow: 0 0 5px var(--terminal-green);
+        }
+
+        .terminal-box .danger-text {
+            color: var(--blood-red);
+            text-shadow: 0 0 5px var(--blood-red);
+        }
+
+        /* ========== الإحصائيات ========== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+            border-top: 1px solid rgba(255, 0, 0, 0.1);
+            padding-top: 25px;
+            width: 100%;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border: 1px solid rgba(255, 0, 0, 0.1);
+        }
+
+        .stat-num {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--blood-red);
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+        }
+
         .stat-label {
             font-size: 0.6rem;
-            opacity: 0.6;
+            color: #555;
             letter-spacing: 1px;
+            margin-top: 5px;
         }
 
         footer {
-            margin-top: 30px;
-            font-size: 0.6rem;
-            opacity: 0.4;
+            margin-top: 35px;
+            font-size: 0.65rem;
+            color: #444;
+            letter-spacing: 1px;
+            text-align: center;
+            display: block;
         }
 
-        /* جسيمات متطايرة */
-        .particles {
+        /* ========== تأثير الجسيمات ========== */
+        .horror-env {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
+            inset: 0;
+            z-index: 1;
             pointer-events: none;
+            overflow: hidden;
         }
-        .particle {
+
+        .matrix-drop {
             position: absolute;
-            color: #00ffcc;
-            font-size: 14px;
-            opacity: 0.3;
-            animation: fall linear infinite;
+            font-family: monospace;
+            font-size: 16px;
+            opacity: 0;
+            animation: horrorFall linear infinite;
         }
-        @keyframes fall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+
+        @keyframes horrorFall {
+            0% { transform: translateY(-105vh); opacity: 0; }
             10% { opacity: 0.5; }
             90% { opacity: 0.5; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(105vh); opacity: 0; }
         }
     </style>
     <script type="module" src="https://unpkg.com/esp-web-tools@3.4.2/dist/web/install-button.js?module"></script>
@@ -280,136 +412,178 @@
 <!-- شاشة الترحيب -->
 <div id="welcomeScreen">
     <div class="welcome-box">
-        <h2>🔐 Cyber Projects Portal</h2>
-        <p>الدخول إلى مكتبة المشاريع التعليمية للأمن السيبراني</p>
-        <button onclick="enterSite()">دخول</button>
-        <p class="developer">Developed By BlackHat01</p>
-        <p class="developer">Powered By Python Hat</p>
+        <h2>⚠️ WARNING </h2>
+        <p>أنت تدخل منطقة عمليات سيبرانية محظورة.</p>
+        
+        <!-- شريط الخيارات الثلاثي -->
+        <div class="policy-links-container">
+            <button class="policy-btn" onclick="toggleModal('aboutModal')">من نحن</button>
+            <button class="policy-btn" onclick="toggleModal('termsModal')">شروط النظام</button>
+            <button class="policy-btn" onclick="toggleModal('privacyModal')">سياسة الاستخدام</button>
+        </div>
+
+        <button class="enter-btn" onclick="bootSystem()">ENTER VOID</button>
+        
+        <div class="developer-tags">
+            <p class="developer">// ROOT@UR_DAEMON:~# BlackHat01</p>
+            <p class="developer">// SYSTEM: NETWORK DISRUPTION MODE</p>
+        </div>
     </div>
 </div>
 
-<!-- جسيمات -->
-<div class="particles" id="particles"></div>
-
-<!-- البطريق المتحرك (الزاوية) -->
-<div class="penguin" id="penguinLogo">
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="50" cy="55" rx="30" ry="35" fill="#1a1a2e" stroke="#00ffcc" stroke-width="2"/>
-        <ellipse cx="50" cy="65" rx="18" ry="22" fill="#f0f0f0"/>
-        <circle cx="50" cy="25" r="20" fill="#1a1a2e" stroke="#00ffcc" stroke-width="2"/>
-        <circle cx="42" cy="22" r="5" fill="white"/>
-        <circle cx="43" cy="22" r="2.5" fill="black"/>
-        <circle cx="58" cy="22" r="5" fill="white"/>
-        <circle cx="57" cy="22" r="2.5" fill="black"/>
-        <polygon points="50,28 46,32 54,32" fill="#ff9900"/>
-        <ellipse cx="18" cy="50" rx="10" ry="18" fill="#1a1a2e" stroke="#00ffcc" stroke-width="1.5" transform="rotate(15, 18, 50)"/>
-        <ellipse cx="82" cy="50" rx="10" ry="18" fill="#1a1a2e" stroke="#00ffcc" stroke-width="1.5" transform="rotate(-15, 82, 50)"/>
-        <ellipse cx="38" cy="90" rx="8" ry="5" fill="#ff9900"/>
-        <ellipse cx="62" cy="90" rx="8" ry="5" fill="#ff9900"/>
-        <polygon points="50,40 44,52 50,48 56,52" fill="#ff0066"/>
-    </svg>
+<!-- نافذة منبثقة 1: من نحن -->
+<div class="modal-overlay" id="aboutModal">
+    <div class="modal-content">
+        <h3 class="about-title">💀 نبذة عن المطور ونظامنا</h3>
+        <p>
+            أنا مختص في مجال الأمن السيبراني، أعمل على اختبار الأنظمة وتحليل الثغرات في بيئات <strong>Windows</strong> و <strong>Kali Linux</strong> ضمن نطاقات اختبار قانونية وآمنة. لدي خبرة في اختبار أمان الشبكات اللاسلكية (Wi-Fi) وتقنيات البلوتوث بهدف تعزيز الحماية وفهم نقاط الضعف.<br><br>
+            كما أعمل كمصمم مواقع إلكترونية، وأهتم بتطوير واجهات حديثة وآمنة مع التركيز على الحماية والأداء وتجربة المستخدم.<br><br>
+            لدي اهتمام بمجال أجهزة <strong>ESP32</strong> ضمن المشاريع التعليمية والبحثية، وفهم أنظمة إنترنت الأشياء (IoT) من ناحية الأمان والتطوير.<br><br>
+            كما أمتلك معرفة في تحليل سلوك الأنظمة والتطبيقات من منظور أمني (Reverse Analysis / RAT concepts بشكل بحثي وتعليمي فقط ضمن بيئات اختبار).<br><br>
+            <span style="color: var(--blood-red); font-weight: bold;">نحن مجموعة سيبرانية هدفها الأساسي هو الحماية، التوعية، واكتشاف الثغرات لتعزيز الأمن الرقمي ضمن بيئات قانونية ومختبرات تدريبية.</span>
+        </p>
+        <button class="close-modal-btn" onclick="toggleModal('aboutModal')">إغلاق</button>
+    </div>
 </div>
 
+<!-- نافذة منبثقة 2: شروط النظام وإخلاء المسؤولية (تم التعديل بطلبك) -->
+<div class="modal-overlay" id="termsModal">
+    <div class="modal-content">
+        <h3 style="color: var(--blood-red);">⚠️ شروط النظام وإخلاء المسؤولية القانونية</h3>
+        <p>
+            <strong>1. إخلاء مسؤولية المطور:</strong><br>
+            يُخلي المطور وفريق العمل مسؤوليتهم الكاملة (قانونياً وفنياً) عن أي استخدام غير مشروع، أو تخريب، أو أضرار ناتجة عن تشغيل الأداة أو رفع الفريم وير الخاص بها على متحكمات ESP32.<br><br>
+            
+            <strong>2. وصف الأداة ومدى خطورتها:</strong><br>
+            تعتبر أداة <strong>UR_DAEMON</strong> نظاماً ذا خطورة عالية وقدرة متقدمة على بث حزم التشويش (Deauthentication / Beacon Spamming) اللاسلكي الفوري، وتوليد إشارات قادرة على قطع الاتصال ضمن نطاق التردد المستهدف.<br><br>
+            
+            <strong>3. حظر إلحاق الضرر بالآخرين:</strong><br>
+            يُحظر حظراً تاماً وقاطعاً استخدام هذه الأداة لتعطيل شبكات الآخرين، أو التسبب في أضرار مادية أو معنوية للمستخدمين العامين أو البنى التحتية المحيطة. الأداة مخصصة لمهام الفحص الداخلي، والبيئات المختبرية المغلقة، والأغراض البحثية والتعليمية فقط.
+        </p>
+        <button class="close-modal-btn" onclick="toggleModal('termsModal')">أوافق على الشروط وأتحمل المسؤولية</button>
+    </div>
+</div>
+
+<!-- نافذة منبثقة 3: سياسة الاستخدام -->
+<div class="modal-overlay" id="privacyModal">
+    <div class="modal-content">
+        <h3>سياسة الخصوصية والأمان</h3>
+        <p>هذا الموقع يعمل محلياً بالكامل عبر بروتوكول الـ WebSerial API للاتصال بالمتحكمات. لا يتم حفظ أو مشاركة أي بيانات تشويش أو ترددات خاصة بـ أجهزة الواي فاي المحيطة بك خارج نطاق جهازك المباشر.</p>
+        <button class="close-modal-btn" onclick="toggleModal('privacyModal')">إغلاق</button>
+    </div>
+</div>
+
+<!-- الخلفية المطرية -->
+<div class="horror-env" id="horrorMatrix"></div>
+
+<!-- واجهة الاستخدام المركزية الثابتة -->
 <div class="container">
-    <!-- الشعار الجديد (البطريق الشرير) -->
-    <div class="logo">
-        <svg width="120" height="120" viewBox="0 0 100 100">
-            <!-- رأس البطريق -->
-            <circle cx="50" cy="30" r="22" fill="#111"/>
-            <!-- عيون شريرة -->
-            <polygon points="35,25 45,22 42,32" fill="red"/>
-            <polygon points="65,25 55,22 58,32" fill="red"/>
-            <!-- بؤبؤ -->
-            <circle cx="42" cy="28" r="2" fill="#fff"/>
-            <circle cx="58" cy="28" r="2" fill="#fff"/>
-            <!-- منقار -->
-            <polygon points="50,38 44,45 56,45" fill="orange"/>
-            <!-- جسم -->
-            <ellipse cx="50" cy="70" rx="25" ry="28" fill="#111"/>
-            <!-- بطن -->
-            <ellipse cx="50" cy="72" rx="14" ry="18" fill="#ddd"/>
-            <!-- أجنحة -->
-            <ellipse cx="24" cy="65" rx="8" ry="18" fill="#111"/>
-            <ellipse cx="76" cy="65" rx="8" ry="18" fill="#111"/>
-            <!-- توهج -->
-            <circle cx="50" cy="50" r="45" fill="none" stroke="#00ffcc" stroke-width="1"/>
+    
+    <!-- شعار بطريق كالي لينكس المطور -->
+    <div class="kali-logo-box">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+            <path d="M100,15 L170,50 L155,140 L100,185 L45,140 L30,50 Z" fill="#030305" stroke="#0087ff" stroke-width="2"/>
+            <ellipse cx="100" cy="115" rx="35" ry="45" fill="#111" stroke="#333" stroke-width="2"/>
+            <ellipse cx="100" cy="120" rx="22" ry="30" fill="#fff"/>
+            <circle cx="100" cy="65" r="22" fill="#111"/>
+            <polygon points="82,58 96,62 94,68 80,64" fill="#ff0000"/>
+            <polygon points="118,58 104,62 106,68 120,64" fill="#ff0000"/>
+            <circle cx="88" cy="62" r="1.5" fill="#fff"/>
+            <circle cx="112" cy="62" r="1.5" fill="#fff"/>
+            <polygon points="100,74 92,66 108,66" fill="#ff6600"/>
+            <path d="M65,100 Q40,110 50,135 Q65,130 68,115 Z" fill="#111"/>
+            <path d="M135,100 Q160,110 150,135 Q135,130 132,115 Z" fill="#111"/>
+            <ellipse cx="80" cy="160" rx="10" ry="5" fill="#ff6600"/>
+            <ellipse cx="120" cy="160" rx="10" ry="5" fill="#ff6600"/>
+            <path d="M35,60 Q20,90 40,120 T90,165 Q140,160 160,120 T150,60 Q100,40 100,10" fill="none" stroke="#0087ff" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="100,10 92,22 108,22" fill="#0087ff"/>
+            <circle cx="97" cy="17" r="1" fill="#fff"/>
+            <circle cx="103" cy="17" r="1" fill="#fff"/>
         </svg>
     </div>
 
-    <h1>GHOST OF NETWORKS</h1>
-    <div class="subtitle">// BLACKHAT INTERFACE //</div>
+    <div class="brand-header">
+        <h1>UR_DAEMON</h1>
+        <div class="subtitle">// OFFENSIVE NETWORK DISRUPTION INTERFACE //</div>
+    </div>
 
-    <p style="margin-bottom: 20px;">منصة رفع الأكواد الثنائية <br> لـ ESP32</p>
+    <p class="description">منصة برمجية متقدمة لحقن وتثبيت حزم التشويش والتعتيم اللاسلكي الفوري على متحكمات وميكروكنترولر <strong>ESP32</strong>.</p>
 
+    <!-- زر التثبيت لـ ESP32 -->
     <esp-web-install-button
         manifest="./firmware/beacon-spam/manifest.json"
         baud-rate="115200">
     </esp-web-install-button>
 
-    <div class="info-box">
-        ⚡ STATUS: <span style="color:#00ffcc">READY</span><br>
-        🔌 TARGET: ESP32 | MODE: Beacon Spam<br>
-        📡 PROTOCOL: Web Serial API v3.4
+    <!-- وحدة البيانات والترمينال السري -->
+    <div class="terminal-box">
+        <div>root@kali:~# <span class="danger-text">./Ur_Daemon --jam-all</span></div>
+        <div>[+] System Status: <span>LIVE_ATTACK_MODE</span></div>
+        <div>[+] Target Architecture: <span class="danger-text">ESP32-WROOM-32</span></div>
+        <div>[+] Payload Configuration: <span>Wi-Fi Beacon Spammer & Deauther</span></div>
+        <div>[+] Injection Engine: <span>WebSerial Serializer API</span></div>
     </div>
 
-    <div class="stats">
-        <div class="stat">
-            <div class="stat-number" id="counter">0</div>
-            <div class="stat-label">DEVICES FLASHED</div>
+    <!-- شبكة الإحصائيات -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-num" id="deviceCounter">0</div>
+            <div class="stat-label">TOTAL DISRUPTED CHANNELS</div>
         </div>
-        <div class="stat">
-            <div class="stat-number">v1.0</div>
-            <div class="stat-label">RELEASE</div>
+        <div class="stat-card">
+            <div class="stat-num">DAEMON v1.2</div>
+            <div class="stat-label">SIGNAL OVERRIDE CORE</div>
         </div>
     </div>
 
     <footer>
-        GHOST OF NETWORKS © 2026 | FOR AUTHORIZED USE ONLY
+        UR_DAEMON SYSTEM © 2026 | UNLEASH THE GHOST WITHIN THE WIRES
     </footer>
 </div>
 
 <script>
-    // إخفاء شاشة الترحيب
-    function enterSite() {
-        const welcomeScreen = document.getElementById("welcomeScreen");
-        welcomeScreen.style.opacity = "0";
+    function toggleModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.toggle('active');
+    }
+
+    function bootSystem() {
+        const welcome = document.getElementById("welcomeScreen");
+        welcome.style.opacity = "0";
         setTimeout(() => {
-            welcomeScreen.style.display = "none";
-        }, 500);
+            welcome.style.display = "none";
+        }, 800);
     }
 
-    // عداد متحرك
-    let counter = 0;
-    const counterEl = document.getElementById('counter');
-    const interval = setInterval(() => {
-        if (counter < 1337) {
-            counter += Math.floor(Math.random() * 50) + 1;
-            if (counter > 1337) counter = 1337;
-            counterEl.textContent = counter;
+    let count = 0;
+    const counterElement = document.getElementById('deviceCounter');
+    const countInterval = setInterval(() => {
+        if (count < 1337) {
+            count += Math.floor(Math.random() * 40) + 5;
+            if (count > 1337) count = 1337;
+            counterElement.textContent = count;
         } else {
-            clearInterval(interval);
+            clearInterval(countInterval);
         }
-    }, 100);
+    }, 50);
 
-    // جسيمات
-    const particlesDiv = document.getElementById('particles');
-    const chars = '01@#$%&*ABCDEF';
-    for (let i = 0; i < 60; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.textContent = chars[Math.floor(Math.random() * chars.length)];
-        p.style.left = Math.random() * 100 + '%';
-        p.style.animationDuration = (Math.random() * 8 + 4) + 's';
-        p.style.animationDelay = (Math.random() * 10) + 's';
-        p.style.fontSize = (Math.random() * 20 + 10) + 'px';
-        p.style.opacity = Math.random() * 0.4 + 0.1;
-        particlesDiv.appendChild(p);
+    const horrorContainer = document.getElementById('horrorMatrix');
+    const horrorSymbols = ['☠', '☣', '✕', '0', '1', 'ERROR', 'DAEMON', 'JAM', '404'];
+    const totalDrops = 60;
+
+    for (let i = 0; i < totalDrops; i++) {
+        const drop = document.createElement('div');
+        drop.className = 'matrix-drop';
+        drop.textContent = horrorSymbols[Math.floor(Math.random() * horrorSymbols.length)];
+        
+        drop.style.left = Math.random() * 100 + '%';
+        drop.style.animationDuration = (Math.random() * 5 + 3) + 's';
+        drop.style.animationDelay = (Math.random() * 6) + 's';
+        drop.style.fontSize = (Math.random() * 14 + 10) + 'px';
+        drop.style.color = Math.random() > 0.5 ? 'var(--blood-red)' : 'var(--kali-blue)';
+        
+        horrorContainer.appendChild(drop);
     }
-
-    // نقر على البطريق الصغير
-    document.getElementById('penguinLogo').addEventListener('click', () => {
-        alert("🐧 أنا بطريق الشبكات! جاهز للرفع!");
-    });
 </script>
 </body>
 </html>
