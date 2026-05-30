@@ -1,111 +1,112 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة المشاريع</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<!-- شاشة الترحيب -->
+<div id="welcomeScreen">
+    <div class="welcome-box">
+        <h2>🔐 Cyber Projects Portal</h2>
+        <p>الدخول إلى مكتبة المشاريع التعليمية للأمن السيبراني</p>
+        <button onclick="enterSite()">دخول</button>
+        <p class="developer">Developed By BlackHat01</p>
+        <p class="developer">Powered By Python Hat</p>
+    </div>
+</div>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Cairo',sans-serif;
-}
+<div class="particles" id="particles"></div>
 
-body{
-    background:#0d1117;
-    color:white;
-}
+<!-- البطريق المتحرك -->
+<div class="penguin" id="penguinLogo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="55" rx="30" ry="35" fill="#1a1a2e" stroke="#00ffcc" stroke-width="2"/>
+        <ellipse cx="50" cy="65" rx="18" ry="22" fill="#f0f0f0"/>
+        <circle cx="50" cy="25" r="20" fill="#1a1a2e" stroke="#00ffcc" stroke-width="2"/>
+        <circle cx="42" cy="22" r="5" fill="white"/>
+        <circle cx="43" cy="22" r="2.5" fill="black"/>
+        <circle cx="58" cy="22" r="5" fill="white"/>
+        <circle cx="57" cy="22" r="2.5" fill="black"/>
+        <polygon points="50,28 46,32 54,32" fill="#ff9900"/>
+        <ellipse cx="18" cy="50" rx="10" ry="18" fill="#1a1a2e" stroke="#00ffcc" stroke-width="1.5" transform="rotate(15, 18, 50)"/>
+        <ellipse cx="82" cy="50" rx="10" ry="18" fill="#1a1a2e" stroke="#00ffcc" stroke-width="1.5" transform="rotate(-15, 82, 50)"/>
+        <ellipse cx="38" cy="90" rx="8" ry="5" fill="#ff9900"/>
+        <ellipse cx="62" cy="90" rx="8" ry="5" fill="#ff9900"/>
+        <polygon points="50,40 44,52 50,48 56,52" fill="#ff0066"/>
+    </svg>
+</div>
 
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 8%;
-    background:#111827;
-}
+<div class="container">
+    <div class="logo">👻</div>
+    <h1>GHOST OF NETWORKS</h1>
+    <div class="subtitle">// BLACKHAT INTERFACE //</div>
 
-.logo{
-    font-size:24px;
-    font-weight:bold;
-    color:#00ffcc;
-}
+    <p style="margin-bottom: 20px;">منصة رفع الأكواد الثنائية <br> لـ ESP32</p>
 
-nav a{
-    color:white;
-    margin:0 10px;
-    text-decoration:none;
-}
+    <esp-web-install-button
+        manifest="./firmware/beacon-spam/manifest.json"
+        baud-rate="115200">
+    </esp-web-install-button>
 
-.main{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:30px;
-}
+    <div class="info-box">
+        ⚡️ STATUS: <span style="color:#00ffcc">READY</span><br>
+        🔌 TARGET: ESP32 | MODE: Beacon Spam<br>
+        📡 PROTOCOL: Web Serial API v3.4
+    </div>
 
-.content h1{
-    font-size:55px;
-    margin-bottom:15px;
-}
-
-.content p{
-    color:#ccc;
-    margin-bottom:25px;
-}
-
-.btn{
-    display:inline-block;
-    padding:12px 25px;
-    background:#00ffcc;
-    color:black;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
-}
-
-.developer{
-    margin-top:30px;
-    color:#00ffcc;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-    <div class="logo">Ghost Of Networks</div>
-
-    <nav>
-        <a href="#">الرئيسية</a>
-        <a href="#">المشاريع</a>
-        <a href="#">التحميلات</a>
-        <a href="#">حول</a>
-    </nav>
-</header>
-
-<section class="main">
-    <div class="content">
-        <h1>منصة مشاريع ESP32</h1>
-
-        <p>
-            تحميل وإدارة المشاريع والملفات البرمجية الخاصة بـ ESP32
-        </p>
-
-        <a href="#" class="btn">تحميل المشروع</a>
-
-        <div class="developer">
-            Developed By BlackHat01<br>
-            Powered By Python Hat
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-number" id="counter">0</div>
+            <div class="stat-label">DEVICES FLASHED</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">v1.0</div>
+            <div class="stat-label">RELEASE</div>
         </div>
     </div>
-</section>
 
+    <footer>
+        GHOST OF NETWORKS © 2026 | FOR AUTHORIZED USE ONLY
+    </footer>
+</div>
+
+<script>
+    // إخفاء شاشة الترحيب عند الضغط على زر "دخول"
+    function enterSite() {
+        const welcomeScreen = document.getElementById("welcomeScreen");
+        welcomeScreen.style.opacity = "0";
+        setTimeout(() => {
+            welcomeScreen.style.display = "none";
+        }, 500);
+    }
+
+    // عداد متحرك
+    let counter = 0;
+    const counterEl = document.getElementById('counter');
+    const interval = setInterval(() => {
+        if (counter < 1337) {
+            counter += Math.floor(Math.random() * 50) + 1;
+            if (counter > 1337) counter = 1337;
+            counterEl.textContent = counter;
+        } else {
+            clearInterval(interval);
+        }
+    }, 100);
+
+    // جسيمات متطايرة
+    const particlesDiv = document.getElementById('particles');
+    const chars = '01@#$%&*ABCDEF';
+    for (let i = 0; i < 60; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.textContent = chars[Math.floor(Math.random() * chars.length)];
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (Math.random() * 8 + 4) + 's';
+        p.style.animationDelay = (Math.random() * 10) + 's';
+        p.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        p.style.opacity = Math.random() * 0.4 + 0.1;
+        particlesDiv.appendChild(p);
+    }
+
+    // نقر على البطريق
+    document.getElementById('penguinLogo').addEventListener('click', () => {
+        alert("🐧 أنا بطريق الشبكات! جاهز للرفع!");
+    });
+</script>
 </body>
 </html>
