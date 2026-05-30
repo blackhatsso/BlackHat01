@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -54,7 +53,6 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            backdrop-filter: blur(0px);
             transition: opacity 0.5s ease;
         }
 
@@ -110,7 +108,19 @@
             opacity: 0.7;
         }
 
-        /* ========== باقي تصميم الموقع ========== */
+        /* ========== الشعار الجديد (البطريق الشرير) ========== */
+        .logo svg {
+            width: 120px;
+            height: 120px;
+            filter: drop-shadow(0 0 10px #00ffcc) drop-shadow(0 0 20px red);
+            margin-bottom: 10px;
+            transition: filter 0.3s ease;
+        }
+        .logo svg:hover {
+            filter: drop-shadow(0 0 20px #00ffcc) drop-shadow(0 0 35px red);
+        }
+
+        /* ========== البطريق المتحرك الأصلي (في الزاوية) ========== */
         .penguin {
             position: fixed;
             bottom: 20px;
@@ -143,6 +153,7 @@
             filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.5));
         }
 
+        /* ========== باقي تصميم الموقع ========== */
         .container {
             position: relative;
             z-index: 2;
@@ -161,12 +172,6 @@
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        .logo {
-            font-size: 70px;
-            filter: drop-shadow(0 0 15px #00ffcc);
-            margin-bottom: 10px;
         }
 
         h1 {
@@ -243,6 +248,7 @@
             opacity: 0.4;
         }
 
+        /* جسيمات متطايرة */
         .particles {
             position: fixed;
             top: 0;
@@ -282,9 +288,10 @@
     </div>
 </div>
 
+<!-- جسيمات -->
 <div class="particles" id="particles"></div>
 
-<!-- البطريق المتحرك -->
+<!-- البطريق المتحرك (الزاوية) -->
 <div class="penguin" id="penguinLogo">
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="50" cy="55" rx="30" ry="35" fill="#1a1a2e" stroke="#00ffcc" stroke-width="2"/>
@@ -304,7 +311,31 @@
 </div>
 
 <div class="container">
-    <div class="logo">👻</div>
+    <!-- الشعار الجديد (البطريق الشرير) -->
+    <div class="logo">
+        <svg width="120" height="120" viewBox="0 0 100 100">
+            <!-- رأس البطريق -->
+            <circle cx="50" cy="30" r="22" fill="#111"/>
+            <!-- عيون شريرة -->
+            <polygon points="35,25 45,22 42,32" fill="red"/>
+            <polygon points="65,25 55,22 58,32" fill="red"/>
+            <!-- بؤبؤ -->
+            <circle cx="42" cy="28" r="2" fill="#fff"/>
+            <circle cx="58" cy="28" r="2" fill="#fff"/>
+            <!-- منقار -->
+            <polygon points="50,38 44,45 56,45" fill="orange"/>
+            <!-- جسم -->
+            <ellipse cx="50" cy="70" rx="25" ry="28" fill="#111"/>
+            <!-- بطن -->
+            <ellipse cx="50" cy="72" rx="14" ry="18" fill="#ddd"/>
+            <!-- أجنحة -->
+            <ellipse cx="24" cy="65" rx="8" ry="18" fill="#111"/>
+            <ellipse cx="76" cy="65" rx="8" ry="18" fill="#111"/>
+            <!-- توهج -->
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#00ffcc" stroke-width="1"/>
+        </svg>
+    </div>
+
     <h1>GHOST OF NETWORKS</h1>
     <div class="subtitle">// BLACKHAT INTERFACE //</div>
 
@@ -338,7 +369,7 @@
 </div>
 
 <script>
-    // إخفاء شاشة الترحيب عند الضغط على زر "دخول"
+    // إخفاء شاشة الترحيب
     function enterSite() {
         const welcomeScreen = document.getElementById("welcomeScreen");
         welcomeScreen.style.opacity = "0";
@@ -360,7 +391,7 @@
         }
     }, 100);
 
-    // جسيمات متطايرة
+    // جسيمات
     const particlesDiv = document.getElementById('particles');
     const chars = '01@#$%&*ABCDEF';
     for (let i = 0; i < 60; i++) {
@@ -375,7 +406,7 @@
         particlesDiv.appendChild(p);
     }
 
-    // نقر على البطريق
+    // نقر على البطريق الصغير
     document.getElementById('penguinLogo').addEventListener('click', () => {
         alert("🐧 أنا بطريق الشبكات! جاهز للرفع!");
     });
