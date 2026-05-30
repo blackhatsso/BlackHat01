@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ur_Daemon - Network Disruption System</title>
-    <!-- استدعاء خطوط مرعبة وسيبرانية حادة -->
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -34,7 +32,6 @@
             position: relative;
         }
 
-        /* تأثير شاشة الرعب (CRT Glitch) */
         body::before {
             content: "";
             position: fixed;
@@ -46,7 +43,7 @@
             z-index: 10;
         }
 
-        /* ========== شاشة الترحيب ========== */
+        /* شاشة الترحيب */
         #welcomeScreen {
             position: fixed;
             inset: 0;
@@ -80,24 +77,13 @@
             color: var(--blood-red);
             font-size: 2.5rem;
             margin-bottom: 15px;
-            letter-spacing: 2px;
         }
 
-        .welcome-box p {
-            color: #8a8a8a;
-            margin-bottom: 20px;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        /* شريط الخيارات الثلاثي */
         .policy-links-container {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-bottom: 25px;
-            border-bottom: 1px dashed rgba(255, 0, 0, 0.15);
-            padding-bottom: 15px;
             flex-wrap: wrap;
         }
 
@@ -105,19 +91,15 @@
             background: transparent;
             border: none;
             color: var(--kali-blue);
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.3s ease;
             text-decoration: underline;
         }
 
         .policy-btn:hover {
             color: var(--blood-red);
-            text-shadow: 0 0 8px var(--blood-red);
         }
 
-        .welcome-box button.enter-btn {
+        .enter-btn {
             padding: 12px 50px;
             border: 2px solid var(--blood-red);
             background: transparent;
@@ -126,32 +108,22 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            display: inline-block;
             width: 100%;
         }
 
-        .welcome-box button.enter-btn:hover {
+        .enter-btn:hover {
             background: var(--blood-red);
             color: #000;
             box-shadow: 0 0 30px var(--blood-red);
         }
 
-        .developer-tags {
-            margin-top: 25px;
-            border-top: 1px dashed rgba(255, 0, 0, 0.2);
-            padding-top: 15px;
-        }
-
         .developer {
             color: #555;
             font-size: 11px;
-            letter-spacing: 2px;
-            font-family: monospace;
+            margin-top: 20px;
         }
 
-        /* ========== نافذة منبثقة للسياسات والشروط ونبذة عني ========== */
+        /* المودالات */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -173,215 +145,220 @@
         .modal-content {
             background: #08080c;
             border: 1px solid var(--kali-blue);
-            box-shadow: 0 0 40px rgba(0, 135, 255, 0.3);
             padding: 25px;
             max-width: 480px;
             width: 90%;
-            text-align: right;
-            border-radius: 4px;
-            transform: scale(0.8);
-            transition: transform 0.4s ease;
             max-height: 85vh;
             overflow-y: auto;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-content h3 {
-            color: var(--kali-blue);
-            font-family: 'Cairo', sans-serif;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            border-bottom: 1px solid rgba(0, 135, 255, 0.2);
-            padding-bottom: 8px;
-        }
-
-        .modal-content h3.about-title {
-            color: #fff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-        }
-
-        .modal-content p {
-            color: #a0a0a5;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.9rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
         }
 
         .close-modal-btn {
             background: var(--kali-blue);
             color: #000;
             border: none;
-            padding: 10px 20px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: bold;
-            font-size: 0.9rem;
+            padding: 10px;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
         }
 
-        .close-modal-btn:hover {
-            background: var(--blood-red);
-            color: #fff;
-        }
-
-        /* ========== الحاوية الرئيسية ========== */
+        /* الحاوية الرئيسية */
         .container {
             position: relative;
             z-index: 5;
             text-align: center;
             padding: 30px 20px;
-            max-width: 650px;
+            max-width: 750px;
             width: 92%;
             background: rgba(5, 5, 8, 0.95);
             border: 1px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 0 100px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(255, 0, 0, 0.05);
             border-radius: 8px;
-            display: block;
             margin: 20px auto;
         }
 
-        /* ========== شعار بطريق كالي لينكس ========== */
+        /* شعار البطريق */
         .kali-logo-box {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 20px auto;
-            display: block;
-            filter: drop-shadow(0 0 15px rgba(0, 135, 255, 0.5));
-            transition: filter 0.3s ease;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 15px auto;
         }
 
-        .kali-logo-box:hover {
-            filter: drop-shadow(0 0 25px var(--blood-red));
-        }
-
-        .brand-header {
+        .kali-logo-box svg {
             width: 100%;
-            text-align: center;
-            margin-bottom: 25px;
-            display: block;
+            height: 100%;
+            filter: drop-shadow(0 0 15px rgba(0, 135, 255, 0.5));
         }
 
         h1 {
-            font-size: 2.1rem;
-            font-weight: 900;
+            font-size: 1.8rem;
             color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 3px 3px 0px var(--blood-red);
-            letter-spacing: 2px;
-            text-align: center;
-            margin: 0 auto 8px auto;
-            display: block;
-            width: 100%;
+            text-shadow: 3px 3px 0px var(--blood-red);
         }
 
         .subtitle {
             color: var(--kali-blue);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            font-weight: bold;
-            text-shadow: 0 0 5px var(--kali-blue);
+            font-size: 0.7rem;
+            margin-bottom: 20px;
+        }
+
+        /* ========== قسم شبكات التشويش ========== */
+        .networks-section {
+            margin: 25px 0;
             text-align: center;
-            margin: 0 auto;
+        }
+
+        .networks-title {
+            color: var(--blood-red);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .networks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .network-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 135, 255, 0.3);
+            border-radius: 6px;
+            padding: 12px 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .network-card:hover {
+            border-color: var(--blood-red);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .network-name {
+            color: #fff;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        .network-status {
+            color: var(--terminal-green);
+            font-size: 0.6rem;
+            margin-top: 5px;
+            opacity: 0.7;
+        }
+
+        /* نافذة رفع الكود المنبثقة */
+        .flash-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #0a0a0f;
+            border: 2px solid var(--blood-red);
+            border-radius: 12px;
+            padding: 25px;
+            z-index: 20000;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+            display: none;
+        }
+
+        .flash-popup.active {
             display: block;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .flash-popup h3 {
+            color: var(--blood-red);
+            margin-bottom: 15px;
+        }
+
+        .flash-popup p {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .flash-popup button {
+            background: var(--blood-red);
+            border: none;
+            padding: 12px 25px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 4px;
+        }
+
+        .flash-popup button.close-popup {
+            background: #333;
+        }
+
+        .flash-popup button:hover {
+            opacity: 0.9;
+        }
+
+        /* زر الرفع الرئيسي */
+        .main-flash-btn {
+            background: var(--blood-red);
+            border: none;
+            padding: 14px 30px;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 15px 0;
+            border-radius: 4px;
             width: 100%;
         }
 
-        .description {
-            color: #b0b0b5;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
-            text-align: center;
-            display: block;
-            padding: 0 10px;
-        }
-
-        /* ========== زر الرفع والترمينال ========== */
-        esp-web-install-button {
-            margin: 25px auto;
-            display: block;
-            --esp-tools-install-button-bg-color: var(--blood-red);
-            --esp-tools-install-button-text-color: #ffffff;
-            --esp-tools-install-button-font-size: 16px;
-            --esp-tools-install-button-border-radius: 4px;
-            --esp-tools-install-button-padding: 12px 35px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            border: 1px solid #000;
+        .main-flash-btn:hover {
+            background: #cc0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
         }
 
         .terminal-box {
-            background: #000000;
-            border-right: 3px solid var(--blood-red);
-            padding: 15px;
-            margin: 25px auto;
-            border-radius: 2px;
+            background: #000;
+            padding: 12px;
+            margin: 20px 0;
             text-align: right;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #666;
-            line-height: 1.8;
-            font-family: 'Courier New', monospace;
-            box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.1);
-            width: 100%;
-            display: block;
-        }
-
-        .terminal-box span {
-            color: var(--terminal-green);
-            text-shadow: 0 0 5px var(--terminal-green);
-        }
-
-        .terminal-box .danger-text {
-            color: var(--blood-red);
-            text-shadow: 0 0 5px var(--blood-red);
-        }
-
-        /* ========== الإحصائيات ========== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 25px;
-            border-top: 1px solid rgba(255, 0, 0, 0.1);
-            padding-top: 25px;
-            width: 100%;
+            font-family: monospace;
         }
 
         .stat-card {
             background: rgba(0, 0, 0, 0.5);
-            padding: 15px;
-            border: 1px solid rgba(255, 0, 0, 0.1);
+            padding: 10px;
+            margin-top: 15px;
         }
 
         .stat-num {
-            font-size: 1.6rem;
-            font-weight: bold;
+            font-size: 1.3rem;
             color: var(--blood-red);
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-        }
-
-        .stat-label {
-            font-size: 0.6rem;
-            color: #555;
-            letter-spacing: 1px;
-            margin-top: 5px;
         }
 
         footer {
-            margin-top: 35px;
-            font-size: 0.65rem;
+            margin-top: 25px;
+            font-size: 0.6rem;
             color: #444;
-            letter-spacing: 1px;
-            text-align: center;
-            display: block;
         }
 
-        /* ========== تأثير الجسيمات ========== */
+        /* جسيمات */
         .horror-env {
             position: fixed;
             inset: 0;
@@ -393,7 +370,7 @@
         .matrix-drop {
             position: absolute;
             font-family: monospace;
-            font-size: 16px;
+            font-size: 14px;
             opacity: 0;
             animation: horrorFall linear infinite;
         }
@@ -412,76 +389,50 @@
 <!-- شاشة الترحيب -->
 <div id="welcomeScreen">
     <div class="welcome-box">
-        <h2>⚠️ WARNING </h2>
+        <h2>⚠️ WARNING ⚠️</h2>
         <p>أنت تدخل منطقة عمليات سيبرانية محظورة.</p>
-        
-        <!-- شريط الخيارات الثلاثي -->
         <div class="policy-links-container">
             <button class="policy-btn" onclick="toggleModal('aboutModal')">من نحن</button>
             <button class="policy-btn" onclick="toggleModal('termsModal')">شروط النظام</button>
             <button class="policy-btn" onclick="toggleModal('privacyModal')">سياسة الاستخدام</button>
         </div>
-
         <button class="enter-btn" onclick="bootSystem()">ENTER VOID</button>
-        
-        <div class="developer-tags">
-            <p class="developer">// ROOT@UR_DAEMON:~# BlackHat01</p>
-            <p class="developer">// SYSTEM: NETWORK DISRUPTION MODE</p>
-        </div>
+        <p class="developer">// ROOT@UR_DAEMON:~# BlackHat01</p>
     </div>
 </div>
 
-<!-- نافذة منبثقة 1: من نحن -->
+<!-- مودالات -->
 <div class="modal-overlay" id="aboutModal">
     <div class="modal-content">
-        <h3 class="about-title">💀 نبذة عن المطور ونظامنا</h3>
-        <p>
-            أنا مختص في مجال الأمن السيبراني، أعمل على اختبار الأنظمة وتحليل الثغرات في بيئات <strong>Windows</strong> و <strong>Kali Linux</strong> ضمن نطاقات اختبار قانونية وآمنة. لدي خبرة في اختبار أمان الشبكات اللاسلكية (Wi-Fi) وتقنيات البلوتوث بهدف تعزيز الحماية وفهم نقاط الضعف.<br><br>
-            كما أعمل كمصمم مواقع إلكترونية، وأهتم بتطوير واجهات حديثة وآمنة مع التركيز على الحماية والأداء وتجربة المستخدم.<br><br>
-            لدي اهتمام بمجال أجهزة <strong>ESP32</strong> ضمن المشاريع التعليمية والبحثية، وفهم أنظمة إنترنت الأشياء (IoT) من ناحية الأمان والتطوير.<br><br>
-            كما أمتلك معرفة في تحليل سلوك الأنظمة والتطبيقات من منظور أمني (Reverse Analysis / RAT concepts بشكل بحثي وتعليمي فقط ضمن بيئات اختبار).<br><br>
-            <span style="color: var(--blood-red); font-weight: bold;">نحن مجموعة سيبرانية هدفها الأساسي هو الحماية، التوعية، واكتشاف الثغرات لتعزيز الأمن الرقمي ضمن بيئات قانونية ومختبرات تدريبية.</span>
-        </p>
+        <h3>💀 نبذة عن المطور</h3>
+        <p>مختص في الأمن السيبراني، اختبار الاختراق، تطوير واجهات آمنة، وأجهزة ESP32 ضمن بيئات قانونية.</p>
         <button class="close-modal-btn" onclick="toggleModal('aboutModal')">إغلاق</button>
     </div>
 </div>
 
-<!-- نافذة منبثقة 2: شروط النظام وإخلاء المسؤولية (تم التعديل بطلبك) -->
 <div class="modal-overlay" id="termsModal">
     <div class="modal-content">
-        <h3 style="color: var(--blood-red);">⚠️ شروط النظام وإخلاء المسؤولية القانونية</h3>
-        <p>
-            <strong>1. إخلاء مسؤولية المطور:</strong><br>
-            يُخلي المطور وفريق العمل مسؤوليتهم الكاملة (قانونياً وفنياً) عن أي استخدام غير مشروع، أو تخريب، أو أضرار ناتجة عن تشغيل الأداة أو رفع الفريم وير الخاص بها على متحكمات ESP32.<br><br>
-            
-            <strong>2. وصف الأداة ومدى خطورتها:</strong><br>
-            تعتبر أداة <strong>UR_DAEMON</strong> نظاماً ذا خطورة عالية وقدرة متقدمة على بث حزم التشويش (Deauthentication / Beacon Spamming) اللاسلكي الفوري، وتوليد إشارات قادرة على قطع الاتصال ضمن نطاق التردد المستهدف.<br><br>
-            
-            <strong>3. حظر إلحاق الضرر بالآخرين:</strong><br>
-            يُحظر حظراً تاماً وقاطعاً استخدام هذه الأداة لتعطيل شبكات الآخرين، أو التسبب في أضرار مادية أو معنوية للمستخدمين العامين أو البنى التحتية المحيطة. الأداة مخصصة لمهام الفحص الداخلي، والبيئات المختبرية المغلقة، والأغراض البحثية والتعليمية فقط.
-        </p>
-        <button class="close-modal-btn" onclick="toggleModal('termsModal')">أوافق على الشروط وأتحمل المسؤولية</button>
+        <h3>⚠️ شروط النظام</h3>
+        <p>يُحظر استخدام هذه الأداة لتعطيل شبكات الآخرين. الأداة مخصصة للاختبارات الداخلية والأغراض التعليمية فقط.</p>
+        <button class="close-modal-btn" onclick="toggleModal('termsModal')">أوافق</button>
     </div>
 </div>
 
-<!-- نافذة منبثقة 3: سياسة الاستخدام -->
 <div class="modal-overlay" id="privacyModal">
     <div class="modal-content">
-        <h3>سياسة الخصوصية والأمان</h3>
-        <p>هذا الموقع يعمل محلياً بالكامل عبر بروتوكول الـ WebSerial API للاتصال بالمتحكمات. لا يتم حفظ أو مشاركة أي بيانات تشويش أو ترددات خاصة بـ أجهزة الواي فاي المحيطة بك خارج نطاق جهازك المباشر.</p>
+        <h3>سياسة الخصوصية</h3>
+        <p>لا يتم حفظ أي بيانات. الموقع يعمل محلياً عبر WebSerial API.</p>
         <button class="close-modal-btn" onclick="toggleModal('privacyModal')">إغلاق</button>
     </div>
 </div>
 
-<!-- الخلفية المطرية -->
+<!-- جسيمات الخلفية -->
 <div class="horror-env" id="horrorMatrix"></div>
 
-<!-- واجهة الاستخدام المركزية الثابتة -->
+<!-- الحاوية الرئيسية -->
 <div class="container">
-    
-    <!-- شعار بطريق كالي لينكس المطور -->
     <div class="kali-logo-box">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <path d="M100,15 L170,50 L155,140 L100,185 L45,140 L30,50 Z" fill="#030305" stroke="#0087ff" stroke-width="2"/>
             <ellipse cx="100" cy="115" rx="35" ry="45" fill="#111" stroke="#333" stroke-width="2"/>
             <ellipse cx="100" cy="120" rx="22" ry="30" fill="#fff"/>
@@ -495,66 +446,80 @@
             <path d="M135,100 Q160,110 150,135 Q135,130 132,115 Z" fill="#111"/>
             <ellipse cx="80" cy="160" rx="10" ry="5" fill="#ff6600"/>
             <ellipse cx="120" cy="160" rx="10" ry="5" fill="#ff6600"/>
-            <path d="M35,60 Q20,90 40,120 T90,165 Q140,160 160,120 T150,60 Q100,40 100,10" fill="none" stroke="#0087ff" stroke-width="3" stroke-linecap="round"/>
-            <polygon points="100,10 92,22 108,22" fill="#0087ff"/>
-            <circle cx="97" cy="17" r="1" fill="#fff"/>
-            <circle cx="103" cy="17" r="1" fill="#fff"/>
         </svg>
     </div>
 
-    <div class="brand-header">
-        <h1>UR_DAEMON</h1>
-        <div class="subtitle">// OFFENSIVE NETWORK DISRUPTION INTERFACE //</div>
+    <h1>UR_DAEMON</h1>
+    <div class="subtitle">// NETWORK DISRUPTION INTERFACE //</div>
+
+    <!-- ========== قسم شبكات التشويش ========== -->
+    <div class="networks-section">
+        <div class="networks-title">⚡ اختر شبكة التشويش ⚡</div>
+        <div class="networks-grid" id="networksGrid">
+            <!-- سيتم تعبئة الأسماء عبر JavaScript -->
+        </div>
     </div>
 
-    <p class="description">منصة برمجية متقدمة لحقن وتثبيت حزم التشويش والتعتيم اللاسلكي الفوري على متحكمات وميكروكنترولر <strong>ESP32</strong>.</p>
+    <!-- نافذة رفع الكود المنبثقة -->
+    <div class="flash-popup" id="flashPopup">
+        <h3>⚠️ رفع الكود على ESP32</h3>
+        <p id="selectedNetworkName">سيتم رفع كود التشويش على جهازك</p>
+        <esp-web-install-button
+            id="installBtn"
+            manifest="./firmware/beacon-spam/manifest.json"
+            baud-rate="115200">
+        </esp-web-install-button>
+        <button class="close-popup" onclick="closeFlashPopup()">إلغاء</button>
+    </div>
 
-    <!-- زر التثبيت لـ ESP32 -->
-    <esp-web-install-button
-        manifest="./firmware/beacon-spam/manifest.json"
-        baud-rate="115200">
-    </esp-web-install-button>
-
-    <!-- وحدة البيانات والترمينال السري -->
     <div class="terminal-box">
-        <div>root@kali:~# <span class="danger-text">./Ur_Daemon --jam-all</span></div>
-        <div>[+] System Status: <span>LIVE_ATTACK_MODE</span></div>
-        <div>[+] Target Architecture: <span class="danger-text">ESP32-WROOM-32</span></div>
-        <div>[+] Payload Configuration: <span>Wi-Fi Beacon Spammer & Deauther</span></div>
-        <div>[+] Injection Engine: <span>WebSerial Serializer API</span></div>
+        <div>root@kali:~# <span style="color:#ff0000">./Ur_Daemon --select-target</span></div>
+        <div>[+] System: <span style="color:#00ff33">READY</span></div>
+        <div>[+] Select network from list above ↑</div>
     </div>
 
-    <!-- شبكة الإحصائيات -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-num" id="deviceCounter">0</div>
-            <div class="stat-label">TOTAL DISRUPTED CHANNELS</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-num">DAEMON v1.2</div>
-            <div class="stat-label">SIGNAL OVERRIDE CORE</div>
-        </div>
+    <div class="stat-card">
+        <div class="stat-num" id="deviceCounter">0</div>
+        <div class="stat-label">TOTAL ATTACKS LAUNCHED</div>
     </div>
 
-    <footer>
-        UR_DAEMON SYSTEM © 2026 | UNLEASH THE GHOST WITHIN THE WIRES
-    </footer>
+    <footer>UR_DAEMON © 2026 | UNLEASH THE GHOST</footer>
 </div>
 
 <script>
-    function toggleModal(modalId) {
-        const modal = document.getElementById(modalId);
-        modal.classList.toggle('active');
-    }
+    // قائمة أسماء الشبكات (كما طلبت - أسماء عربية للتشويش)
+    const networkNames = [
+        "⚠️ المنطقة مخترقة ⚠️",
+        "🔥 شبكة التشويش 🔥",
+        "هاكر في منطقتك",
+        "تم اختراق جهازك",
+        "⚠️ خطر أمني ⚠️",
+        "شبكة تجسس سوداء",
+        "Kali Linux Hunter",
+        "Anonymous Access",
+        "⚠️ HACKED ⚠️",
+        "Dark Shadow Network",
+        "اختراق كامل",
+        "بياناتك مسروقة"
+    ];
 
-    function bootSystem() {
-        const welcome = document.getElementById("welcomeScreen");
-        welcome.style.opacity = "0";
-        setTimeout(() => {
-            welcome.style.display = "none";
-        }, 800);
-    }
+    // عرض الشبكات في القسم
+    const networksGrid = document.getElementById('networksGrid');
+    let selectedNetwork = '';
 
+    networkNames.forEach((name, index) => {
+        const card = document.createElement('div');
+        card.className = 'network-card';
+        card.setAttribute('data-network', name);
+        card.onclick = () => openFlashPopup(name);
+        card.innerHTML = `
+            <div class="network-name">${name}</div>
+            <div class="network-status">⚡ جاهز للرفع</div>
+        `;
+        networksGrid.appendChild(card);
+    });
+
+    // عداد متحرك
     let count = 0;
     const counterElement = document.getElementById('deviceCounter');
     const countInterval = setInterval(() => {
@@ -565,24 +530,60 @@
         } else {
             clearInterval(countInterval);
         }
-    }, 50);
+    }, 80);
 
+    // نافذة رفع الكود
+    function openFlashPopup(networkName) {
+        selectedNetwork = networkName;
+        const popup = document.getElementById('flashPopup');
+        const networkSpan = document.getElementById('selectedNetworkName');
+        networkSpan.innerHTML = `رفع كود التشويش <strong style="color:#ff0000">"${networkName}"</strong> على ESP32`;
+        popup.classList.add('active');
+    }
+
+    function closeFlashPopup() {
+        document.getElementById('flashPopup').classList.remove('active');
+    }
+
+    // إغلاق شاشة الترحيب
+    function bootSystem() {
+        const welcome = document.getElementById("welcomeScreen");
+        welcome.style.opacity = "0";
+        setTimeout(() => {
+            welcome.style.display = "none";
+        }, 800);
+    }
+
+    // المودالات
+    function toggleModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.toggle('active');
+    }
+
+    // جسيمات الخلفية
     const horrorContainer = document.getElementById('horrorMatrix');
     const horrorSymbols = ['☠', '☣', '✕', '0', '1', 'ERROR', 'DAEMON', 'JAM', '404'];
-    const totalDrops = 60;
+    const totalDrops = 50;
 
     for (let i = 0; i < totalDrops; i++) {
         const drop = document.createElement('div');
         drop.className = 'matrix-drop';
         drop.textContent = horrorSymbols[Math.floor(Math.random() * horrorSymbols.length)];
-        
         drop.style.left = Math.random() * 100 + '%';
-        drop.style.animationDuration = (Math.random() * 5 + 3) + 's';
-        drop.style.animationDelay = (Math.random() * 6) + 's';
-        drop.style.fontSize = (Math.random() * 14 + 10) + 'px';
-        drop.style.color = Math.random() > 0.5 ? 'var(--blood-red)' : 'var(--kali-blue)';
-        
+        drop.style.animationDuration = (Math.random() * 8 + 4) + 's';
+        drop.style.animationDelay = (Math.random() * 15) + 's';
+        drop.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        drop.style.color = Math.random() > 0.7 ? '#ff0000' : '#0087ff';
+        drop.style.opacity = Math.random() * 0.5 + 0.2;
         horrorContainer.appendChild(drop);
+    }
+
+    // إغلاق النافذة المنبثقة إذا ضغط المستخدم خارجها
+    window.onclick = function(event) {
+        const popup = document.getElementById('flashPopup');
+        if (event.target === popup) {
+            closeFlashPopup();
+        }
     }
 </script>
 </body>
