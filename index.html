@@ -2,18 +2,57 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>Ghost of Networks - BlackHat01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost of Networks - رافع أكواد ESP32</title>
     <style>
-        body { background: #0a0a0a; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: #00ffcc; }
-        .container { text-align: center; padding: 30px; border: 1px solid #00ffcc; border-radius: 15px; background: #111; }
-        h1 { text-shadow: 0 0 10px #00ffcc; }
+        body {
+            background: #0a0a0a;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #00ffcc;
+        }
+        .container {
+            text-align: center;
+            padding: 30px;
+            border: 1px solid #00ffcc;
+            border-radius: 15px;
+            background: #111;
+            max-width: 600px;
+            margin: 20px;
+        }
+        h1 {
+            text-shadow: 0 0 10px #00ffcc;
+        }
+        esp-web-install-button {
+            margin: 20px auto;
+            display: block;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #888;
+        }
     </style>
+    <script type="module" src="https://unpkg.com/esp-web-tools@3.4.2/dist/web/install-button.js?module"></script>
 </head>
 <body>
 <div class="container">
     <h1>👻 GHOST OF NETWORKS 👻</h1>
     <p>منصة رفع الأكواد الثنائية لـ ESP32</p>
-    <button onclick="alert('جاري تجهيز أداة الرفع قريباً')">رفع الكود (قريباً)</button>
+
+    <esp-web-install-button
+        manifest="./firmware/beacon-spam/manifest.json">
+    </esp-web-install-button>
+
+    <div class="note">
+        ⚠️ يتطلب متصفح <strong>Chrome أو Edge</strong><br>
+        🔌 تأكد من توصيل ESP32 بالكمبيوتر<br>
+        📁 سيتم رفع كود <strong>Beacon Spam (شبكات وهمية)</strong>
+    </div>
 </div>
 </body>
 </html>
