@@ -5,36 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ghost of Networks - رافع أكواد ESP32</title>
     <style>
+        /* إعدادات الخلفية المتحركة */
         body {
-            background: #0a0a0a;
+            margin: 0;
+            min-height: 100vh;
             font-family: 'Courier New', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
             color: #00ffcc;
+            position: relative;
+            background: #0a0a0a;
+            /* الخلفية المتحركة (شبكة متحركة) */
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveGrid 20s linear infinite;
         }
+
+        /* حركة الشبكة */
+        @keyframes moveGrid {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 40px 40px;
+            }
+        }
+
+        /* تأثير توهج إضافي */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, #0a0a0a 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* الحاوية المركزية */
         .container {
+            position: relative;
+            z-index: 1;
             text-align: center;
             padding: 30px;
             border: 1px solid #00ffcc;
             border-radius: 15px;
-            background: #111;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(5px);
             max-width: 600px;
             margin: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.2);
         }
+
         h1 {
             text-shadow: 0 0 10px #00ffcc;
+            font-size: 2.5rem;
         }
+
+        /* تحسين مظهر الزر */
         esp-web-install-button {
             margin: 20px auto;
             display: block;
+            --esp-tools-install-button-bg-color: #00ffcc;
+            --esp-tools-install-button-text-color: #0a0a0a;
+            --esp-tools-install-button-border-radius: 50px;
+            transition: transform 0.3s ease;
         }
+        esp-web-install-button:hover {
+            transform: scale(1.05);
+        }
+
         .note {
             margin-top: 20px;
             font-size: 0.8rem;
             color: #888;
+        }
+
+        /* تأثير وميض للعنوان */
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 5px #00ffcc; }
+            50% { text-shadow: 0 0 20px #00ffcc; }
+        }
+        h1 {
+            animation: glow 2s ease-in-out infinite;
         }
     </style>
     <script type="module" src="https://unpkg.com/esp-web-tools@3.4.2/dist/web/install-button.js?module"></script>
@@ -45,13 +103,14 @@
     <p>منصة رفع الأكواد الثنائية لـ ESP32</p>
 
     <esp-web-install-button
-        manifest="./firmware/beacon-spam/manifest.json">
+        manifest="./firmware/beacon-spam/manifest.json"
+        baud-rate="115200">
     </esp-web-install-button>
 
     <div class="note">
         ⚠️ يتطلب متصفح <strong>Chrome أو Edge</strong><br>
         🔌 تأكد من توصيل ESP32 بالكمبيوتر<br>
-        📁 سيتم رفع كود <strong>Beacon Spam (شبكات وهمية)</strong>
+        📁 يجب أن تكون جميع الملفات الثنائية في المجلد الصحيح
     </div>
 </div>
 </body>
